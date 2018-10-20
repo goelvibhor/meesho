@@ -27,26 +27,22 @@ public class InvoiceController {
     @Autowired
     private PdfService pdfService;
 
-    private ExecutorService executorService;
-
-    public InvoiceController() {
-        // can create bean for this
-        this.executorService = Executors.newCachedThreadPool();
-    }
-
     // add the request validation
     @PostMapping(value = "/generateInvoice/order/{orderId}", produces = "application/json")
     public ResponseEntity<Boolean> generateInvoiceForOrder(@PathVariable String orderId) {
         //validate input parameter
-
         if(StringUtils.isEmpty(orderId)){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
 
         DetailedOderDto order = orderService.getDetailedOrder(orderId);
+        if(order == null){
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+
         // it will indicate that it didn't generate the invoice but it was already present
         if(order.getInvoiceUrl() != null && order.getInvoiceUrl().trim().length() > 0){
-            return new ResponseEntity<>(Boolean.FALSE, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(false, HttpStatus.ACCEPTED);
         }
 
         String pdfData = formaterService.formatPdfData(order);
@@ -54,10 +50,14 @@ public class InvoiceController {
         String filePath = pdfService.generateFilePath();
         boolean result = pdfService.savePdfData(pdfData, filePath);
         if(!result){
-            return new ResponseEntity<>(Boolean.FALSE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         String url = pdfService.uploadPdf(filePath);
+
+        if(url == null || url.trim().length() == 0){
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         orderService.updateInvoiceUrl(orderId, url);
 

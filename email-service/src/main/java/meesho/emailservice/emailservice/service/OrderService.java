@@ -32,6 +32,7 @@ public class OrderService {
         return new DetailedOderDto(order, user, paymentDetails);
     }
 
+    // it should retry 3 times before failing
     public boolean updateEmailSendWithInvoice(String orderId, boolean emailSendWithInvoice){
         return true;
     }
