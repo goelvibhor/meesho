@@ -1,4 +1,4 @@
-package meesho.emailservice.emailservice;
+package meesho.invoiceservice.invoiceservice.service;
 
 import meesho.data.DetailedOderDto;
 import meesho.data.OrderDto;
@@ -32,7 +32,7 @@ public class OrderService {
         return new DetailedOderDto(order, user, paymentDetails);
     }
 
-    public boolean updateEmailSendWithInvoice(String orderId, boolean emailSendWithInvoice){
+    public boolean updateInvoiceUrl(String orderId, String invoiceUrl){
         return true;
     }
 

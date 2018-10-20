@@ -1,4 +1,4 @@
-package meesho.invoiceservice.invoiceservice;
+package meesho.invoiceservice.invoiceservice.service;
 
 import meesho.data.PaymentDetailsDto;
 import org.springframework.stereotype.Service;

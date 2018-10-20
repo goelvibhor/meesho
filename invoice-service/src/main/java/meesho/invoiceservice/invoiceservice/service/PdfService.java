@@ -1,4 +1,4 @@
-package meesho.invoiceservice.invoiceservice;
+package meesho.invoiceservice.invoiceservice.service;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,8 @@ public class PdfService {
 
     public String uploadPdf(String filePath){
         //upload the file to cloud storage and return the url
+
+        // throw exception if not able to upload
         return null;
     }
 }

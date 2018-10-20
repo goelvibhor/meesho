@@ -1,8 +1,10 @@
-package meesho.emailservice.emailservice;
+package meesho.emailservice.emailservice.controller;
 
 import meesho.data.DetailedOderDto;
+import meesho.emailservice.emailservice.service.EmailService;
+import meesho.emailservice.emailservice.service.FormaterService;
+import meesho.emailservice.emailservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,7 @@ public class EmailController {
     private FormaterService formaterService;
 
     @Autowired
-    private EmailSerice emailSerice;
+    private EmailService emailService;
 
     @PostMapping("/sendemail/order/{orderId}")
     public Boolean sendEmailForOrder(@PathVariable String orderId) {
@@ -34,7 +36,7 @@ public class EmailController {
         String subject = formaterService.formatEmailSubject(order);
         String body = formaterService.formatEmailBody(order);
 
-        boolean result = emailSerice.sendEmail(order.getUser().getEmail(), subject, body);
+        boolean result = emailService.sendEmail(order.getUser().getEmail(), subject, body);
 
         if(!result){
             return false;

@@ -1,4 +1,4 @@
-package meesho.emailservice.emailservice;
+package meesho.emailservice.emailservice.service;
 
 import meesho.data.UserDto;
 import org.springframework.stereotype.Service;
