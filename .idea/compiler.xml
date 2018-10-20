@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="email-service" />
+        <module name="invoice-service" />
+        <module name="meesho" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="email-service" target="1.8" />
+      <module name="invoice-service" target="1.8" />
+      <module name="meesho" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
